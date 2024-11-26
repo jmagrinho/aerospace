@@ -158,14 +158,6 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
-if.app-id = 'com.jetbrains.intellij'
-run = 'move-node-to-workspace I'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace C'
-
-[[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace B'
 
@@ -199,11 +191,11 @@ run = 'move-node-to-workspace V'
 
 [workspace-to-monitor-force-assignment]
 1 = 'LG ULTRAGEAR'                           
-2 = 'ASUS VG249'                       
-3 = 'Built-in Retina Display'
-S = 'ASUS VG249'              
-N = 'ASUS VG249'                   
-M = 'Built-in Retina Display'
-U = 'Built-in Retina Display'
-D = 'ASUS VG249'
-V = 'ASUS VG249'
+2 = 'DELL P2723QE'                       
+3 = 'DELL P2723QE'
+S = 'DELL P2723QE'              
+N = 'DELL P2723QE'                   
+M = 'DELL P2723QE'
+U = 'DELL P2723QE'
+D = 'DELL P2723QE'
+V = 'DELL P2723QE'
