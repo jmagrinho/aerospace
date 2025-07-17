@@ -11,7 +11,18 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+
+after-startup-command = [
+    # JankyBorders has a built-in detection of already running process,
+    # so it won't be run twice on AeroSpace restart
+    #'exec-and-forget borders active_color=0xff61afef inactive_color=0xff494d64 width=5.0'
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+    'exec-and-forget sketchybar'
+]
+
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -52,12 +63,13 @@ on-focus-changed = "move-mouse window-lazy-center"
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 5
-inner.vertical =   5
-outer.left =       5
-outer.bottom =     5
-outer.top =        5
-outer.right =      5
+inner.horizontal = 10
+inner.vertical =   10
+outer.left =       2
+outer.bottom =     2
+outer.top = [{ monitor."built-in" = 0 }, 36]
+outer.right =      2
+
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -108,32 +120,32 @@ alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1' # Ultrawide monitor : Browser + Code (IDEs, VSCode/IntelliJ)
-alt-2 = 'workspace 2' # Vertical monitor : Slack + Notes
-alt-3 = 'workspace 3' # Macbook display : Terminals + Music
-alt-b = 'workspace B' # Browser
-alt-c = 'workspace C' # vsCode
-alt-d = 'workspace D' # vsCode
-alt-i = 'workspace I' # IntelliJ
-alt-m = 'workspace M' # Music
-alt-n = 'workspace N' # Notes
-alt-s = 'workspace S' # Slack
-alt-u = 'workspace U' # Utils
-alt-v = 'workspace V' # VLC
+alt-1 = 'workspace 1' # Browser
+alt-2 = 'workspace 2' # Slack
+alt-3 = 'workspace 3' # Code
+alt-4 = 'workspace 4' # Notes (obsidian)
+alt-5 = 'workspace 5' # Finder / Terminal
+alt-6 = 'workspace 6' # 
+alt-7 = 'workspace 7' # 
+alt-8 = 'workspace 8' # 
+alt-9 = 'workspace 9' # 
+alt-0 = 'workspace 0' # 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-b = 'move-node-to-workspace B'
-alt-shift-c = 'move-node-to-workspace C'
-alt-shift-d = 'move-node-to-workspace D'
-alt-shift-i = 'move-node-to-workspace I'
-alt-shift-m = 'move-node-to-workspace M'
-alt-shift-n = 'move-node-to-workspace N'
-alt-shift-s = 'move-node-to-workspace S'
-alt-shift-u = 'move-node-to-workspace U'
-alt-shift-v = 'move-node-to-workspace V'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 0'
+
+alt-shift-q = 'close'
+
+
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -149,8 +161,8 @@ alt-shift-semicolon = 'mode service'
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 #s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-backspace = ['close-all-windows-but-current', 'mode main']
+#f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+#backspace = ['close-all-windows-but-current', 'mode main']
 
 alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
@@ -159,43 +171,44 @@ alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Terminal'
-run = 'move-node-to-workspace U'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = 'move-node-to-workspace U'
+run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
-if.app-id = 'md.obsidian'
-run = 'move-node-to-workspace N'
-
-[[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
-run = 'move-node-to-workspace D'
-
-[[on-window-detected]]
-if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace M'
+if.app-id = 'com.apple.Terminal'
+run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace S'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-if.app-id = 'org.videolan.vlc'
-run = 'move-node-to-workspace V'
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace 6'
+
+[[on-window-detected]]
+run = 'move-node-to-workspace 0'
 
 [workspace-to-monitor-force-assignment]
-1 = 'LG ULTRAGEAR'                           
-2 = 'DELL P2723QE'                       
-3 = 'DELL P2723QE'
-S = 'DELL P2723QE'              
-N = 'DELL P2723QE'                   
-M = 'DELL P2723QE'
-U = 'DELL P2723QE'
-D = 'DELL P2723QE'
-V = 'DELL P2723QE'
+0 = 'main'
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+6 = ['secondary', 'main']
+7 = ['secondary', 'main']
+8 = ['secondary', 'main']
+9 = ['secondary', 'main']                        
+
